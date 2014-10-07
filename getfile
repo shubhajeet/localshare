@@ -1,0 +1,12 @@
+#!/bin/bash
+getfile()
+{
+    echo "Trying to get file hosted in $1"
+    sudo nc $1 $2 | pv > tmp.tar
+    if [ $(tar -xf tmp.tar) ]
+    then
+	echo "files fetched"
+    fi
+    rm tmp.tar
+}
+getfile $@

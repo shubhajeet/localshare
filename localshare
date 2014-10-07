@@ -1,0 +1,25 @@
+#!/bin/bash
+localshare()
+{
+    echo "localshare"
+    echo "File to be shared $1"
+    if [ -e $1 ] 
+    then
+	echo "file exists"
+	ip=$(ip addr | grep 'state UP' -A2 | tail -n1 | awk '{print $2}' | cut -f1 -d'/')
+	echo "file is to be hosted at $ip:$2"
+	echo "creating an temporary archive $1.tar"
+	tar -cf $1.tar $1
+	if $(cat $1.tar| pv | sudo nc -lp $2)
+	then
+	    rm $1.tar
+	    return 0
+	fi
+    
+    else
+	echo "File doesnot exist"
+	return -1
+    fi
+}
+localshare $@
+
