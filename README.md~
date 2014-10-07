@@ -31,4 +31,4 @@
 
 	USE
 	syntax: localshare file/folder_to_be_shared port_no
-		getfile ip_address port_no
+		getfile 

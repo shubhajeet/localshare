@@ -47,6 +47,4 @@ localshare()
 if [ $# == 2 ]
 then
 	localshare $@
-else
-	echo "Uses: localshare file port_no"
-fi
+

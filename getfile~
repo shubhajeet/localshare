@@ -30,7 +30,7 @@ getfile()
     rm tmp.tar
 }
 # checking the number of argument
-if [ $# == 2 ]
+if [ $# == 3 ]
 then
 	getfile $@
 else
