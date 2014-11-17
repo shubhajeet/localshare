@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <!-- interface-requires gtk+ 3.8 -->
+  <object class="GtkWindow" id="window">
+    <property name="title" translatable="yes">GLocalshare</property>
+    <property name="border-width">50</property> 
+    <property name="default-width">600</property>
+    <property name="default-height">400</property>
+    <property name="resizable">False</property>
+    <child type="titlebar">
+     
+          <object class="GtkHeaderBar" id="header">
+            <property name="visible">True</property>
+            <property name="show-close-button">True</property>
+	    
+            <child type="title">
+              <object class="GtkStackSwitcher" id="tabs">
+                <property name="visible">True</property>
+                <property name="margin">6</property>
+                <property name="stack">stack</property>
+		<child>
+		</child>
+		
+	      </object>
+	    </child>
+	     
+	    <child>
+              <object class="GtkMenuButton" id="menu_button">
+                <property name="visible">True</property>
+                <property name="direction">none</property>
+                <property name="menu-model">menubar</property>
+		<property name="label">&#8801;</property>
+                <style>
+                  <class name="image-button"/>
+                </style>
+		<child>
+
+		  <menu id="menubar">
+		    <section>
+		      <item>
+			<attribute name="label">About</attribute>
+			<attribute name="action">app.about</attribute>
+		      </item>
+		    </section>
+		    <section>
+		      <item>
+			<attribute name="label">Quit</attribute>
+			<attribute name="action">app.quit</attribute>
+		      </item>
+		    </section>
+		
+		  </menu>
+		</child>
+
+              </object>
+              <packing>
+                <property name="pack-type">start</property>
+              </packing>
+            </child>
+
+	    <child>
+	      
+	    </child>
+          </object>
+        </child>
+        <child>
+	  <object class="GtkVBox" id="content">
+	    <property name="visible">True</property>
+	    <child>
+              <object class="GtkStack" id="stack">
+		<property name="visible">True</property>
+		
+	   
+              </object>
+            </child>
+            <!--<child>
+              <object class="GtkLabel" id="display">
+		<property name="visible">True</property>
+
+		
+              </object>
+            </child>-->
+
+	  </object>
+	</child>
+  </object>
+	
+  <object class="GtkVBox" id="localshare_page">
+    <property name="visible">True</property>
+    <property name="homogeneous">True</property>
+    <property name="spacing">10</property>
+    <child>
+      <object class="GtkHBox" id="share_line1">
+	<property name="visible">True</property>
+        <property name="homogeneous">True</property>
+	<property name="spacing">10</property>
+	<child>
+	  <object class="GtkLabel" id="share_line1_label">
+	    <property name="visible">True</property>
+	    <property name="label">File Name:</property>
+	  </object>
+	</child>
+	<child>
+	  <object class="GtkEntry" id="share_file">
+	    <property name="visible">True</property>
+	    
+	    
+	  </object>
+	</child>
+	
+      </object>
+    </child>
+    <child>
+      <object class="GtkHBox" id="share_line2">
+	<property name="visible">True</property>
+        <property name="homogeneous">True</property>
+	<property name="spacing">10</property>
+	<child>
+	  <object class="GtkLabel" id="share_line2_label">
+	    <property name="visible">True</property>
+	    <property name="label">Port Number:</property>
+	  </object>
+	</child>
+	<child>
+	  <object class="GtkEntry" id="share_port_no">
+	    <property name="visible">True</property>
+	  </object>
+	</child>
+      </object>
+      
+    </child>
+<child>
+      <object class="GtkHBox" id="share_line3">
+	<property name="visible">True</property>
+        <property name="homogeneous">True</property>
+	<property name="spacing">10</property>
+	<child>
+	  <object class="GtkLabel" id="share_line3_label">
+	    <property name="visible">True</property>
+	    <property name="label">Local IP Address:</property>
+	  </object>
+	</child>
+	<child>
+	  <object class="GtkLabel" id="share_ip">
+	    <property name="visible">True</property>
+	  </object>
+	</child>
+      </object>
+    </child>
+    <child>
+      <object class="GtkButtonBox" id="submitbox">
+	<property name="visible">True</property>
+	<child>
+	  <object class="GtkButton" id="localshare">
+	    <property name="visible">True</property>
+	    <property name="label">Share File</property>
+	    <signal name="clicked" handler="runlocalshare" />
+	
+            
+	  </object>
+	  <packing>
+            <property name="pack-type">end</property>
+	  </packing>
+	</child>
+      </object>
+    </child>
+  </object>
+  
+	
+  <object class="GtkVBox" id="getshare_page">
+    <property name="visible">False</property>
+    <property name="homogeneous">True</property>
+    <property name="spacing">10</property>
+    <child>
+      <object class="GtkHBox" id="get_line1">
+	<property name="visible">True</property>
+        <property name="homogeneous">True</property>
+	<property name="spacing">10</property>
+	<child>
+	  <object class="GtkLabel" id="get_line1_label">
+	    <property name="visible">True</property>
+	    <property name="label">File Name:</property>
+	  </object>
+	</child>
+	<child>
+	  <object class="GtkEntry" id="get_file">
+	    <property name="visible">True</property>
+	    
+	  </object>
+	</child>
+      </object>
+    </child>
+<child>
+      <object class="GtkHBox" id="get_line2">
+	<property name="visible">True</property>
+        <property name="homogeneous">True</property>
+	<property name="spacing">10</property>
+	<child>
+	  <object class="GtkLabel" id="get_line2_label">
+	    <property name="visible">True</property>
+	    <property name="label">Port No:</property>
+	  </object>
+	</child>
+	<child>
+	  <object class="GtkEntry" id="get_port_no">
+	    <property name="visible">True</property>
+	    
+	  </object>
+	</child>
+      </object>
+    </child> 
+     
+    <child>
+      <object class="GtkHBox" id="get_line3">
+	<property name="visible">True</property>
+        <property name="homogeneous">True</property>
+	<property name="spacing">10</property>
+	<child>
+	  <object class="GtkLabel" id="get_line3_label">
+	    <property name="visible">True</property>
+	    <property name="label">IP Address:</property>
+	  </object>
+	</child>
+	<child>
+	  <object class="GtkEntry" id="get_ip">
+	    <property name="visible">True</property>
+	  </object>
+	</child>
+      </object>
+    </child>
+    <child>
+      <object class="GtkButtonBox" id="getsubmit">
+	<property name="visible">True</property>
+      <child>
+	  <object class="GtkButton" id="getshare">
+	    <property name="visible">True</property>
+	    <property name="label">Get File</property>
+	    <signal name="clicked" handler="rungetshare" /> 
+	  </object>
+	</child>
+      </object>
+    </child>
+
+  </object>
+  
+</interface>
