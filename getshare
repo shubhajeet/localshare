@@ -1,0 +1,38 @@
+########################################################################################
+#
+#	@file: getshare
+#	@author: shubhajeet
+#	@licence: GPL V2
+#	@about: This file grabs the hosted file
+#
+#######################################################################################
+
+#!/bin/bash
+
+#####################
+#
+# function getshare
+# @uses: getshare ipaddress port_no file
+# @return:	 0 sucessful completion
+#		
+#
+#####################
+
+getfile()
+{
+    echo "Trying to get file hosted in $1 and saving it at /tmp/tmp.tar"
+    sudo nc $1 $2 > /tmp/tmp.tar
+    if [ $(tar -C $3 -xf /tmp/tmp.tar) ]
+    then
+	cho "files fetched"
+	rm /tmp/tmp.tar
+	return 0
+    fi
+}
+# checking the number of argument
+if [ $# == 3 ]
+then
+	getfile $@
+else
+	echo "Uses: getshare ip_address port_no file"
+fi
