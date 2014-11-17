@@ -30,8 +30,12 @@ localshare()
 	echo "file is to be hosted at $ip port no $2"
 	echo "creating an temporary archive $1.tar"
 	# creating temporary archive to be hosted
-	tar -cf $1.tar $1
-	if $(cat $1.tar| pv | sudo nc -lp $2) # hosting the file
+	dir=$(dirname $1)
+	file=$(basename $1)
+	echo $dir
+	echo $file
+	tar -C $dir -cvf $1.tar $file 
+	if $(cat $1.tar| sudo nc -lp $2) # hosting the file
 	then
 		# removing the temporary archive
 	    rm $1.tar
