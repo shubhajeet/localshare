@@ -20,15 +20,17 @@
 	network to general people by simplifying it.
 
 	INSTALL
-
+	
 	The installation process just involves the copying the shell script
 	to /usr/share/bin
+	It also copies gtk application to /usr/share/bin
 
 	UNISTALL
 	
 	This is just a revesrse process. It deletes the shell script from
 	/usr/share/bin
+	It also copies gtk application to /usr/share/bin
 
 	USE
 	syntax: localshare file/folder_to_be_shared port_no
-		getfile ip_address port_no
+		getshare ip_address port_no file

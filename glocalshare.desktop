@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=glocalshare
-Exec=/usr/bin/glocalshare
+Exec=/usr/local/bin/glocalshare
+Icon=/usr/local/bin/icon.png
 Type=Application
-Categories=Internet;
+StartupNotify=true

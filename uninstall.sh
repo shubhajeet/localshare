@@ -18,8 +18,7 @@ then
 			if [ -e /usr/local/bin/glocalshare ]
 			then
 			    rm /usr/local/bin/glocalshare
-			    rm /usr/local/bin/builder.ui
-			    rm /usr/local/bin/icon.png
+			    rm -r /usr/share/glocalshare
 			    rm /usr/share/applications/glocalshare.desktop
 			fi
 		else

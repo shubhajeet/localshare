@@ -19,8 +19,9 @@ then
 			    #copying gnome application
 			    cp glocalshare /usr/local/bin/
 			    cp glocalshare.desktop /usr/share/applications/
-			    cp builder.ui /usr/local/bin/
-			    cp icon.png /usr/local/bin/
+			    mkdir /usr/share/glocalshare
+			    cp builder.ui /usr/share/glocalshare/
+			    cp icon.png /usr/share/glocalshare/
 			fi
 		else
 			echo "ERROR: getfile does not exist"

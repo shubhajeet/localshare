@@ -6,10 +6,10 @@
  #include <gtk/gtk.h>
  #include <stdlib.h>
 
- #define UI_FILE "builder.ui"
-
- #define LOCALSHARE "/localshare"
-#define GETSHARE "/getshare"
+ #define UI_FILE "/usr/share/glocalshare/builder.ui"
+ #define ICON "/usr/share/glocalshare/icon.png"
+ #define LOCALSHARE "localshare"
+#define GETSHARE "getshare"
 
 GtkWidget *window;
 GtkWidget *menu_button;
@@ -67,7 +67,7 @@ int run_bash_displaying(char *cmd)
 	      line[no++] = '\0';
 	      putchar(c);
 	      no = 0;
-	      *line ="";
+	      line[0] ="";
 	    }
 
 
@@ -87,7 +87,7 @@ runlocalshare (GtkButton *button,
   char path[100];
   pwd(path);
   char cmd[400];
-  sprintf(cmd,"pkexec bash %s%s %s %s",path,LOCALSHARE,file_name,port);
+  sprintf(cmd,"pkexec bash %s %s %s",LOCALSHARE,file_name,port);
   g_print(cmd);
   int pid = fork();
   if( pid == -1)
@@ -112,10 +112,9 @@ rungetshare (GtkButton *button,
   const char* file_name = gtk_entry_get_text(getfile);
   const char* port =  gtk_entry_get_text(getport);
   const char* ip = gtk_entry_get_text(getip);
-  char path[100];
-  pwd(path);
+ 
   char cmd[400];
-  sprintf(cmd,"pkexec bash %s%s %s %s %s",path,GETSHARE,ip,port,file_name);
+  sprintf(cmd,"pkexec bash %s %s %s %s",GETSHARE,ip,port,file_name);
   g_print(cmd);
   int pid = fork();
   if( pid == -1)
@@ -177,8 +176,8 @@ startup (GtkApplication *app,
 	 gpointer user_data)
 {
  GMenu *menu;
-  GSimpleAction *quit_action;
-GSimpleAction *about_action;
+ GSimpleAction *quit_action;
+ GSimpleAction *about_action;
   /* Initialize the GMenu, and add a menu item with label "About" and action 
    * "win.about". Also add another menu item with label "Quit" and action 
    * "app.quit" 
@@ -220,9 +219,10 @@ activate (GtkApplication *app,
   //GtkBuilder *menu_builder;
   char ip[20]="";
   localip(ip);
-  g_print(ip);
-  run_bash_displaying("pwd");
+  
   builder = gtk_builder_new ();
+  
+ 
   if (!gtk_builder_add_from_file (builder, UI_FILE, &error))
     {
       g_critical ("Couldn't load builder file: %s", error->message);
@@ -240,8 +240,7 @@ activate (GtkApplication *app,
   getport = GTK_ENTRY(gtk_builder_get_object (builder, "get_port_no"));
   getip = GTK_ENTRY(gtk_builder_get_object (builder, "get_ip"));  
   shareip = GTK_LABEL(gtk_builder_get_object (builder, "share_ip"));
-//display = GTK_LABEL(gtk_builder_get_object (builder, "display"));
-  
+  //display = GTK_LABEL(gtk_builder_get_object (builder, "display"));
   
   gtk_label_set_text(shareip,ip);
   stack = GTK_STACK(gtk_builder_get_object(builder,"stack"));
@@ -249,9 +248,9 @@ activate (GtkApplication *app,
   ui_page[1] = GTK_WIDGET(gtk_builder_get_object(builder,"getshare_page"));
   gtk_stack_add_titled (stack,ui_page[0],"show_localshare","localshare");
   gtk_stack_add_titled (stack,ui_page[1],"show_getshare","getshare");
-  GMenu *menu = G_MENU_MODEL (gtk_builder_get_object (builder,"menubar"));
+  GMenu *menu = G_MENU (gtk_builder_get_object (builder,"menubar"));
   gtk_application_set_app_menu (app, G_MENU_MODEL(menu));
-  gtk_window_set_default_icon_from_file("icon.png",&error);
+  gtk_window_set_default_icon_from_file( ICON ,&error);
   
 
   gtk_widget_show_all (window);
@@ -267,7 +266,7 @@ main (int argc, char **argv)
   int status;
 
 
-  app = gtk_application_new ("np.com.maharjansujit.glocalshare", G_APPLICATION_FLAGS_NONE);
+  app = gtk_application_new ("org.gtk.glocalshare", G_APPLICATION_FLAGS_NONE);
   g_signal_connect (app, "startup", G_CALLBACK (startup), NULL);
   g_signal_connect (app, "activate", G_CALLBACK (activate), NULL);  
 
