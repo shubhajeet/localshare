@@ -11,10 +11,17 @@ then
 		# removing the script
 		rm /usr/local/bin/localshare
 		echo "/usr/local/bin/localshare is deleted"
-		if [ -e /usr/local/bin/getfile ] # checking if the script exist
+		if [ -e /usr/local/bin/getshare ] # checking if the script exist
 		then
 			# removing the script
-			rm /usr/local/bin/getfile
+			rm /usr/local/bin/getshare
+			if [ -e /usr/local/bin/glocalshare ]
+			then
+			    rm /usr/local/bin/glocalshare
+			    rm /usr/local/bin/builder.ui
+			    rm /usr/local/bin/icon.png
+			    rm /usr/share/applications/glocalshare.desktop
+			fi
 		else
 			echo "ERROR: getfile does not exist"
 		fi

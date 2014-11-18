@@ -1,0 +1,5 @@
+[Desktop Entry]
+Name=glocalshare
+Exec=/usr/bin/glocalshare
+Type=Application
+Categories=Internet;
