@@ -209,15 +209,10 @@ static void
 activate (GtkApplication *app,
           gpointer        user_data)
 {
-  
-  GtkStack *stack;
-  
   GError* error = NULL;
   GtkBuilder *builder;
-  //GtkButton *run_localshare;
-  //GtkButton *run_getshare;
-  //GtkBuilder *menu_builder;
-  char ip[20]="";
+  
+  gchar ip[20]="";
   localip(ip);
   
   builder = gtk_builder_new ();
@@ -230,8 +225,7 @@ activate (GtkApplication *app,
     }
   
   window = GTK_WIDGET(gtk_builder_get_object (builder, "window"));
-  //run_localshare = GTK_BUTTON(gtk_builder_get_object (builder, "localshare"));
-  //run_getshare = GTK_BUTTON(gtk_builder_get_object (builder, "getshare"));
+  
   
   gtk_builder_connect_signals(builder,app);
   sharefile = GTK_ENTRY(gtk_builder_get_object(builder,"share_file"));
@@ -240,16 +234,13 @@ activate (GtkApplication *app,
   getport = GTK_ENTRY(gtk_builder_get_object (builder, "get_port_no"));
   getip = GTK_ENTRY(gtk_builder_get_object (builder, "get_ip"));  
   shareip = GTK_LABEL(gtk_builder_get_object (builder, "share_ip"));
-  //display = GTK_LABEL(gtk_builder_get_object (builder, "display"));
+  
   
   gtk_label_set_text(shareip,ip);
-  stack = GTK_STACK(gtk_builder_get_object(builder,"stack"));
-  ui_page[0] = GTK_WIDGET(gtk_builder_get_object(builder,"localshare_page"));
-  ui_page[1] = GTK_WIDGET(gtk_builder_get_object(builder,"getshare_page"));
-  gtk_stack_add_titled (stack,ui_page[0],"show_localshare","localshare");
-  gtk_stack_add_titled (stack,ui_page[1],"show_getshare","getshare");
-  GMenu *menu = G_MENU (gtk_builder_get_object (builder,"menubar"));
-  gtk_application_set_app_menu (app, G_MENU_MODEL(menu));
+  
+
+  //  GMenu *menu = G_MENU (gtk_builder_get_object (builder,"menubar"));
+  
   gtk_window_set_default_icon_from_file( ICON ,&error);
   
 
